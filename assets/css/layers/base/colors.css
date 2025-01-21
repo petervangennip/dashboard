@@ -1,0 +1,7 @@
+@layer base {
+  :root {
+    /* black and white */
+    --color-black: 10 10 10; /* #0A0A0A */
+    --color-white: 255 255 255; /* #FFFFFF */
+  }
+}
