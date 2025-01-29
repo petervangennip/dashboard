@@ -17,8 +17,19 @@ logs
 .DS_Store
 .fleet
 .idea
+*.favorites.json
+.favorites.json
+.ssl
 
 # Local env files
 .env
 .env.*
 !.env.example
+!.env.acc.example
+!.env.prod.example
+
+# vs code
+!.vscode
+
+# Sonarqube tmp
+.scannerwork
