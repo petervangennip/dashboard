@@ -1,13 +1,13 @@
 {
   "name": "nuxt-app",
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --https --ssl-cert ./.ssl/localhost.pem --ssl-key ./.ssl/localhost-key.pem",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "node-version": "node ./scripts/switch-node-version.js"
   },
   "dependencies": {
     "@nuxt/eslint": "^0.7.5",
@@ -31,6 +31,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "autoprefixer": "^10.4.20",
     "axe-core": "^4.10.2",
+    "date-fns": "^4.1.0",
     "postcss": "^8.5.1",
     "puppeteer": "^24.1.0",
     "tailwindcss": "^3.4.17",

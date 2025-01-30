@@ -19,7 +19,7 @@ export default {
       current: 'currentColor',
 
       // Loop through each color category to generate the shades (50, 100, 200, ..., 950)
-      ...['green', 'blue', 'orange', 'red', 'gray'].reduce((acc, category) => {
+      ...['green', 'yellow', 'blue', 'orange', 'red', 'gray'].reduce((acc, category) => {
         const shades = Array.from({ length: 10 }, (_, i) => (i + 1) * 100); // Generates [100, 200, ..., 900]
 
         // For each category, add the shades dynamically
