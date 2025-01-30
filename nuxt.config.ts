@@ -64,6 +64,8 @@ export default defineNuxtConfig({
     // Public keys that are exposed to the client
     public: {
       siteHostname: process.env.SITE_HOSTNAME || '',
+      supabaseUrl: process.env?.SUPABASE_URL || null,
+      supabaseKey: process.env?.SUPABASE_KEY || null,
     },
   },
 });

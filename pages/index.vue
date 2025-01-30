@@ -9,100 +9,21 @@
             <!-- Dashboard blocks -->
             <div class="mb-8 grid grid-cols-12 gap-8">
               <div class="col-span-12 lg:col-span-6">
-                <div class="h-full border bg-white px-8 py-6 shadow">
-                  <form
-                    class="mb-6"
-                    @submit.prevent="checkAccessibility"
-                  >
-                    <label
-                      for="url"
-                      class="mb-2 block text-sm font-medium"
-                      >Website URL</label
-                    >
-                    <input
-                      id="url"
-                      v-model="url"
-                      type="text"
-                      placeholder="https://example.com"
-                      class="mb-4 w-full rounded border p-2"
-                    />
-                    <button
-                      type="submit"
-                      class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-                      @click="addNewUrl"
-                    >
-                      Submit new site
-                    </button>
-                  </form>
-                </div>
+                <DashboardItemSearch @submit="addNewUrl" />
               </div>
-
-              <!-- <DashboardMainBlock
-                v-for="(result, index) in results"
-                :key="index"
-                :name="result.url"
-                :number="result.passes.length"
-                class="col-span-12 lg:col-span-6"
-              /> -->
-
+              <!-- Results Grid -->
               <div
-                v-for="(result, index) in results"
-                :key="index"
+                v-for="result in results"
+                :key="result.id"
                 class="col-span-12 lg:col-span-6"
               >
-                <router-link
-                  :to="{ name: 'ResultDetails', params: { url: result.url } }"
-                  class="col-span-12 block lg:col-span-6"
+                <nuxt-link
+                  :to="{ name: `results-url`, params: { url: result.id } }"
+                  class="no-underline"
                 >
-                  <div class="border bg-white px-8 py-6 shadow">
-                    <p class="mb-8 w-fit rounded-sm bg-gray-200 px-2 py-1 text-sm">
-                      {{ formatIsoDate(result.results.timestamp, 'dd-MM-yyyy') }}
-                    </p>
-                    <h3 class="mb-8 font-semibold">{{ result.url }}</h3>
-
-                    <div class="grid grid-cols-4 gap-4">
-                      <div class="border-2 border-gray-500 bg-green-400 py-4">
-                        <div class="flex flex-col items-center">
-                          <span class="mb-2 text-5xl font-bold leading-10">{{ result.results.passes.length }}</span>
-                          <span class="text-lg font-bold uppercase">Passes</span>
-                        </div>
-                      </div>
-
-                      <div class="border-2 border-gray-500 bg-red-400 py-4">
-                        <div class="flex flex-col items-center">
-                          <span class="mb-2 text-5xl font-bold leading-10">{{ result.results.violations.length }}</span>
-                          <span class="text-lg font-bold uppercase">violations</span>
-                        </div>
-                      </div>
-
-                      <div class="border-2 border-gray-500 bg-yellow-400 py-4">
-                        <div class="flex flex-col items-center">
-                          <span class="mb-2 text-5xl font-bold leading-10">{{
-                            result.results.inapplicable.length
-                          }}</span>
-                          <span class="text-lg font-bold uppercase">inapplicable</span>
-                        </div>
-                      </div>
-
-                      <div class="border-2 border-gray-500 bg-blue-400 py-4">
-                        <div class="flex flex-col items-center">
-                          <span class="mb-2 text-5xl font-bold leading-10">{{ result.results.incomplete.length }}</span>
-                          <span class="text-lg font-bold uppercase">Incomplete</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </router-link>
+                  <DashboardMainBlock :result="result" />
+                </nuxt-link>
               </div>
-            </div>
-
-            <!-- Accessibility Results -->
-            <div
-              v-if="results"
-              class="mb-8 rounded bg-white p-4 shadow"
-            >
-              <h2 class="mb-4 text-xl font-bold">Accessibility Results</h2>
-              <!-- Collapse components for violations, passes, etc. -->
             </div>
           </div>
         </div>
@@ -112,32 +33,29 @@
 </template>
 
 <script setup>
-  import { ref, watch, onMounted } from 'vue';
+  import DashboardItemSearch from '~/components/dashboard/item/DashboardItemSearch.vue';
 
-  // Declare a variable for storing results
-  // const results = ref([]);
-  import data from '@/components/results.json';
-
-  const newUrl = ref('');
+  const { $supabase } = useNuxtApp(); // This should now work correctly
   const loading = ref(false);
-  const results = ref(data);
+  const results = ref([]);
 
-  // Check for localStorage availability and load results from it
-  onMounted(() => {
-    if (typeof window !== 'undefined' && localStorage.getItem('results')) {
-      results.value = JSON.parse(localStorage.getItem('results'));
+  // ✅ Function to Fetch Accessibility Results from Supabase
+  const fetchResults = async () => {
+    loading.value = true;
+    const { data, error } = await $supabase.from('accessibility_results').select('*');
+
+    if (error) {
+      console.error('Error fetching results:', error);
+    } else if (data) {
+      results.value = data;
     }
-  });
 
-  // Watch for changes in the results array and save them to localStorage
-  watch(results, (newResults) => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('results', JSON.stringify(newResults));
-    }
-  });
+    loading.value = false;
+  };
 
-  const addNewUrl = async () => {
-    if (!newUrl.value) {
+  // ✅ Function to Add a New URL & Store Results in Supabase
+  const addNewUrl = async (url) => {
+    if (!url) {
       alert('Please enter a valid URL.');
       return;
     }
@@ -145,10 +63,10 @@
     loading.value = true;
 
     try {
-      // Make API call to fetch accessibility data
+      // Call API to check accessibility
       const response = await $fetch('/api/a11y-check', {
         method: 'POST',
-        body: { url: newUrl.value },
+        body: { url: url },
       });
 
       if (response?.data?.hasError) {
@@ -156,11 +74,20 @@
         alert('Failed to check accessibility.');
       } else {
         const newResult = {
-          url: newUrl.value,
+          url: url,
           results: response.results,
+          created_at: new Date().toISOString(),
         };
-        // Add the result to the dashboard
-        results.value.push(newResult);
+
+        // Insert data into Supabase and return inserted row
+        const { data, error } = await $supabase.from('accessibility_results').insert(newResult).select();
+
+        if (error) {
+          console.error('Error inserting:', error);
+          alert('Failed to save to database.');
+        } else {
+          results.value = [...results.value, ...data]; // Append the new row correctly
+        }
       }
     } catch (error) {
       console.error(error);
@@ -168,8 +95,8 @@
     } finally {
       loading.value = false;
     }
-
-    // Reset input field
-    newUrl.value = '';
   };
+
+  // ✅ Fetch results when component mounts
+  onMounted(fetchResults);
 </script>
