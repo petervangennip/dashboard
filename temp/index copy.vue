@@ -29,7 +29,7 @@
                     <button
                       type="submit"
                       class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-                      @click="addNewUrl"
+                      @click="addResult"
                     >
                       Submit new site
                     </button>
@@ -137,7 +137,7 @@
     }
   });
 
-  const addNewUrl = async () => {
+  const addResult = async () => {
     if (!newUrl.value) {
       alert('Please enter a valid URL.');
       return;
