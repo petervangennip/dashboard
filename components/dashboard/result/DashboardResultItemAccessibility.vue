@@ -1,13 +1,13 @@
 <template>
   <div
-    class="border-2 border-gray-500 py-4"
+    class="rounded-sm border border-gray-900 py-4 shadow"
     :class="props.color"
   >
     <div class="flex flex-col items-center">
-      <span class="mb-2 text-5xl font-bold leading-10">
+      <span class="mb-2 text-3xl font-bold leading-8">
         {{ props.length }}
       </span>
-      <span class="text-lg font-bold uppercase">{{ props.name }}</span>
+      <span class="text-base font-bold">{{ props.name }}</span>
     </div>
   </div>
 </template>
