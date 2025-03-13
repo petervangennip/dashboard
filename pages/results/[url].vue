@@ -16,24 +16,24 @@
             <div class="mt-4 grid grid-cols-4 gap-4">
               <div class="bg-green-400 p-4">
                 <h2 class="text-lg font-bold">Passes</h2>
-                <p class="text-4xl">{{ result?.results?.passes.length }}</p>
+                <p class="text-4xl">{{ result?.accessibility_results?.passes.length }}</p>
               </div>
               <div class="bg-red-400 p-4">
                 <h2 class="text-lg font-bold">Violations</h2>
-                <p class="text-4xl">{{ result?.results?.violations.length }}</p>
+                <p class="text-4xl">{{ result?.accessibility_results?.violations.length }}</p>
               </div>
             </div>
           </div>
 
           <!-- Results -->
           <div
-            v-if="result?.results"
+            v-if="result?.accessibility_results"
             class="mb-8 rounded bg-white p-8 shadow"
           >
             <h2 class="mb-4 text-xl font-bold">Accessibility Results</h2>
 
             <BaseCollapse
-              v-if="result?.results?.violations && result?.results?.violations.length"
+              v-if="result?.accessibility_results?.violations && result?.accessibility_results?.violations.length"
               :multiple="false"
               class="accordion"
             >
@@ -42,7 +42,7 @@
                 <template #body>
                   <ul class="list-disc pl-5">
                     <li
-                      v-for="(violation, index) in result?.results?.violations"
+                      v-for="(violation, index) in result?.accessibility_results?.violations"
                       :key="index"
                     >
                       <strong>{{ violation.id }}</strong
@@ -62,7 +62,7 @@
             </BaseCollapse>
 
             <BaseCollapse
-              v-if="result?.results?.passes && result?.results?.passes.length"
+              v-if="result?.accessibility_results?.passes && result?.accessibility_results?.passes.length"
               :multiple="false"
               class="accordion"
             >
@@ -71,7 +71,7 @@
                 <template #body>
                   <ul class="list-disc pl-5">
                     <li
-                      v-for="(pass, index) in result?.results?.passes"
+                      v-for="(pass, index) in result?.accessibility_results?.passes"
                       :key="index"
                     >
                       <strong>{{ pass.id }}</strong
@@ -84,7 +84,7 @@
 
             <!-- Incomplete -->
             <BaseCollapse
-              v-if="result?.results?.incomplete && result?.results?.incomplete.length"
+              v-if="result?.accessibility_results?.incomplete && result?.accessibility_results?.incomplete.length"
               :multiple="false"
               class="accordion"
             >
@@ -93,7 +93,7 @@
                 <template #body>
                   <ul class="list-disc pl-5">
                     <li
-                      v-for="(incomplete, index) in result?.results?.incomplete"
+                      v-for="(incomplete, index) in result?.accessibility_results?.incomplete"
                       :key="index"
                     >
                       <strong>{{ incomplete.id }}</strong
@@ -106,7 +106,7 @@
 
             <!-- Inapplicable -->
             <BaseCollapse
-              v-if="result?.results?.inapplicable && result?.results?.inapplicable.length"
+              v-if="result?.accessibility_results?.inapplicable && result?.accessibility_results?.inapplicable.length"
               :multiple="false"
               class="accordion"
             >
@@ -115,7 +115,7 @@
                 <template #body>
                   <ul class="list-disc pl-5">
                     <li
-                      v-for="(inapplicable, index) in result?.results.inapplicable"
+                      v-for="(inapplicable, index) in result?.accessibility_results.inapplicable"
                       :key="index"
                     >
                       <strong>{{ inapplicable.id }}</strong>
@@ -127,7 +127,7 @@
           </div>
 
           <div
-            v-if="result?.results"
+            v-if="result?.accessibility_results"
             class="rounded bg-white p-8 shadow"
           >
             <h2 class="mb-4 text-xl font-bold">Accessibility Results</h2>
@@ -136,14 +136,14 @@
               <h3 class="mb-2 text-lg font-semibold">Test Details</h3>
               <ul>
                 <li>
-                  <strong>Engine:</strong> {{ result?.results?.testEngine?.name }} v{{
-                    result?.results?.testEngine?.version
+                  <strong>Engine:</strong> {{ result?.accessibility_results?.testEngine?.name }} v{{
+                    result?.accessibility_results?.testEngine?.version
                   }}
                 </li>
-                <li><strong>Environment:</strong> {{ result?.results?.testEnvironment?.userAgent }}</li>
-                <li><strong>Runner:</strong> {{ result?.results?.testRunner?.name }}</li>
-                <li><strong>URL Tested:</strong> {{ result?.results?.url }}</li>
-                <li><strong>Timestamp:</strong> {{ result?.results?.timestamp }}</li>
+                <li><strong>Environment:</strong> {{ result?.accessibility_results?.testEnvironment?.userAgent }}</li>
+                <li><strong>Runner:</strong> {{ result?.accessibility_results?.testRunner?.name }}</li>
+                <li><strong>URL Tested:</strong> {{ result?.accessibility_results?.url }}</li>
+                <li><strong>Timestamp:</strong> {{ result?.accessibility_results?.timestamp }}</li>
               </ul>
             </div>
           </div>

@@ -7,19 +7,11 @@
       {{ formatIsoDate(props.result.created_at, 'dd-MM-yyyy') }}
     </span>
 
-    <div class="flex gap-4">
-      <button
-        class="relative z-[3] mt-auto flex items-center rounded-sm bg-red-500 px-2 py-1 text-white shadow hover:bg-red-600"
-        @click="$emit('delete', result.id)"
-      >
-        <Icon name="ic:baseline-delete" />
-      </button>
-      <p class="flex items-center break-all font-bold">
-        {{ cleanUrl(result.url) }}
-      </p>
-    </div>
+    <h3 class="mb-8 flex items-center break-all font-bold">
+      {{ cleanUrl(result.url) }}
+    </h3>
 
-    <!-- <div class="mb-4 grid grid-cols-4 gap-4">
+    <div class="mb-4 grid grid-cols-4 gap-4">
       <DashboardResultItemAccessibility
         v-if="props.result?.accessibility_results?.passes"
         :length="props.result.accessibility_results.passes.length"
@@ -43,14 +35,14 @@
 
       <DashboardResultItemAccessibility
         v-if="props.result?.accessibility_results?.incomplete"
-        :length="props.result.accessibility_results.incomplete.length"
+        :score="props.result.accessibility_results.incomplete.length"
         color="bg-blue-400"
         name="Incomplete"
       />
-    </div> -->
+    </div>
 
     <!-- Lighthouse Scores -->
-    <!-- <div class="mb-4 grid grid-cols-4 gap-4">
+    <div class="mb-4 grid grid-cols-4 gap-4">
       <DashboardResultItemLighthouse
         v-if="props.result?.lighthouse_scores?.scores?.performance"
         :score="props.result.lighthouse_scores.scores?.performance"
@@ -78,12 +70,23 @@
         color="bg-red-400"
         name="SEO"
       />
-    </div> -->
+    </div>
 
     <nuxt-link
       :to="{ name: `results-url`, params: { url: result.id } }"
       class="absolute bottom-0 left-0 right-0 top-0 z-[2] no-underline"
     />
+
+    <button
+      class="relative z-[3] mt-auto flex items-center rounded-sm bg-red-500 px-3 py-1 text-white shadow hover:bg-red-600"
+      @click="$emit('delete', result.id)"
+    >
+      <Icon
+        name="ic:baseline-delete"
+        class="mr-2"
+      />
+      <span>Delete</span>
+    </button>
   </div>
 </template>
 
