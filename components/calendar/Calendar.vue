@@ -96,7 +96,15 @@
     return [...data.value.items].sort((a, b) => new Date(a.start.date) - new Date(b.start.date));
   });
 
-  onMounted(fetchEvents);
+  onMounted(() => {
+    fetchEvents(); // Initial fetch
+    setInterval(
+      () => {
+        window.location.reload(); // Reloads the page
+      },
+      60 * 60 * 1000,
+    ); // 60 minutes
+  });
 </script>
 
 <style scoped>
