@@ -42,6 +42,8 @@
 </template>
 
 <script setup>
+  const config = useRuntimeConfig(); // Access the runtimeConfig
+
   const CALENDAR_ID = 'c_ffb03ed80e220b82c128b6672fa15cb9e8ea043508ac1cfde0ba9e3cb8bbde5d@group.calendar.google.com';
 
   const data = ref(null);
@@ -83,7 +85,7 @@
   async function fetchEvents() {
     try {
       const response = await fetch(
-        `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`,
+        `https://www.googleapis.com/calendar/v3/calendars/${config.googleApiKey}/events?key=${API_KEY}`,
       );
       const result = await response.json();
 

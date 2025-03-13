@@ -61,6 +61,7 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    googleApiKey: process.env?.GOOGLE_API_KEY || null,
     // Public keys that are exposed to the client
     public: {
       siteHostname: process.env.SITE_HOSTNAME || '',
