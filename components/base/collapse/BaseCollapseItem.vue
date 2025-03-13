@@ -1,34 +1,17 @@
 <template>
-  <div class="border-t border-gray-300 first:border-none last:border-b">
+  <div
+    class="border-t border-gray-300 first:border-none last:border-b"
+    :class="[{ 'is-active': isActive }]"
+  >
     <div
       class="flex cursor-pointer items-center gap-3"
       @click="toggle"
     >
       <button
-        class="accordion-item-button flex w-full text-base font-semibold leading-6 lg:text-xl lg:leading-8"
+        class="accordion-item-button relative flex w-full text-base font-semibold leading-6 lg:text-xl lg:leading-8"
         type="button"
       >
-        <div
-          v-if="iconInFront"
-          class="mr-4 flex size-6 items-center justify-center rounded-full bg-tertiary-200 lg:size-8"
-        >
-          <Icon
-            name="ph:caret-down"
-            class="size-4 text-gray-950"
-            :class="{ 'rotate-180 transform transition-transform': isActive }"
-          />
-        </div>
         <slot name="header" />
-        <div
-          v-if="!iconInFront"
-          class="ml-auto flex size-6 items-center justify-center rounded-full bg-tertiary-200 lg:size-8"
-        >
-          <Icon
-            name="ph:caret-down"
-            class="size-4 text-gray-950"
-            :class="{ 'rotate-180 transform transition-transform': isActive }"
-          />
-        </div>
       </button>
     </div>
     <div
@@ -48,10 +31,6 @@
       required: true,
     },
     indent: {
-      type: Boolean,
-      default: true,
-    },
-    iconInFront: {
       type: Boolean,
       default: true,
     },
