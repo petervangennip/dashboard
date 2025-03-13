@@ -42,7 +42,6 @@
 </template>
 
 <script setup>
-  const API_KEY = 'AIzaSyAQewk0p7inDw778hoMt46i6eAhsM42q3s';
   const CALENDAR_ID = 'c_ffb03ed80e220b82c128b6672fa15cb9e8ea043508ac1cfde0ba9e3cb8bbde5d@group.calendar.google.com';
 
   const data = ref(null);
