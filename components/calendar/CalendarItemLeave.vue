@@ -1,47 +1,51 @@
 <template>
   <p
     v-if="props?.event?.summary"
-    class="mb-4 text-xl font-bold"
+    class="mb-4 text-2xl font-bold"
   >
     {{ props?.event.summary }}
   </p>
   <div
     v-if="props?.event?.start?.dateTime && props?.event?.end?.dateTime"
-    class="flex items-center gap-4"
+    class="flex flex-wrap items-center justify-center gap-4"
   >
     <span
       v-if="props?.event?.start?.dateTime"
-      class="rounded-sm border border-gray-300 bg-gray-200 px-3 py-1 text-sm"
+      class="rounded-sm border border-gray-400 bg-gray-200 px-3 py-1 text-sm"
     >
       {{ formatIsoDate(props?.event.start.dateTime, 'dd-MM-yyyy') }}
     </span>
-    <span class="flex items-center gap-2">
+    <span class="flex items-center justify-center gap-2">
       <span
         v-if="event?.start?.dateTime"
-        class="rounded-sm border border-gray-300 bg-gray-200 px-3 py-1 text-sm"
+        class="rounded-sm border border-gray-400 bg-gray-200 px-3 py-1 text-sm"
       >
         {{ formatIsoDate(event.start.dateTime, 'HH:MM') }}
       </span>
-      -
+      <span> - </span>
+
       <span
         v-if="event?.end?.dateTime"
-        class="rounded-sm border border-gray-300 bg-gray-200 px-3 py-1 text-sm"
+        class="rounded-sm border border-gray-400 bg-gray-200 px-3 py-1 text-sm"
       >
         {{ formatIsoDate(event.end.dateTime, 'HH:MM') }}
       </span>
     </span>
   </div>
-  <div v-if="props?.event?.start?.date && props?.event?.end?.date">
+  <div
+    v-if="props?.event?.start?.date && props?.event?.end?.date"
+    class="flex flex-wrap items-center justify-center gap-4"
+  >
     <span
       v-if="props?.event?.start?.date"
-      class="rounded-sm border border-gray-300 bg-gray-200 px-3 py-1 text-sm"
+      class="rounded-sm border border-gray-400 bg-gray-200 px-3 py-1 text-sm"
     >
       {{ formatIsoDate(props?.event.start.date, 'dd-MM-yyyy') }}
     </span>
-    -
+    <span> - </span>
     <span
       v-if="props?.event?.end?.date"
-      class="rounded-sm border border-gray-300 bg-gray-200 px-3 py-1 text-sm"
+      class="rounded-sm border border-gray-400 bg-gray-200 px-3 py-1 text-sm"
     >
       {{ formatIsoDate(props?.event.end.date, 'dd-MM-yyyy') }}
     </span>

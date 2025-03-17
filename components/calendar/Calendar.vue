@@ -1,16 +1,14 @@
 <template>
   <div class="calendar">
     <section class="mb-8">
-      <h2 class="mb-8">📅 Eerstvolgende Kantinedienst</h2>
-      <div
-        class="relative mb-4 rounded-sm border-2 border-gray-600 bg-white p-4 text-center shadow-md transition-all duration-300"
-      >
-        <CalendarItemCanteen :event="nextCanteenEvent" />
-      </div>
-    </section>
+      <h2 class="mb-8">
+        <Icon
+          name="twemoji:calendar"
+          class="mr-2 size-8"
+        />
 
-    <section class="mb-8">
-      <h2 class="mb-8">📅 Aankomend verlof & vrije dagen</h2>
+        Aankomend verlof & vrije dagen
+      </h2>
       <ul class="grid grid-cols-3 gap-4">
         <li
           v-for="event in sortedEvents"
@@ -27,7 +25,6 @@
 
 <script setup>
   const leaveData = ref(null);
-  const canteenData = ref(null);
 
   // Check if the event is currently active and return a class
   const isActivePeriod = (event) => {
@@ -50,19 +47,6 @@
 
       // Assign sorted events to data
       leaveData.value = result;
-    } catch (error) {
-      console.error('Error fetching calendar events:', error);
-    }
-  }
-
-  // Fetch Canteen events
-  async function fetchCanteenEvents() {
-    try {
-      const response = await fetch('/api/google-events-canteen-service'); // Call the backend route
-      const result = await response.json();
-
-      // Assign sorted events to data
-      canteenData.value = result;
     } catch (error) {
       console.error('Error fetching calendar events:', error);
     }
@@ -100,26 +84,14 @@
       });
   });
 
-  const nextCanteenEvent = computed(() => {
-    if (!canteenData.value || !canteenData.value.items) return null;
-
-    const today = new Date().toISOString().split('T')[0]; // Huidige datum in 'YYYY-MM-DD' formaat
-
-    return [...canteenData.value.items]
-      .filter((event) => event.start?.date >= today) // Filter alleen toekomstige events
-      .sort((a, b) => new Date(a.start.date) - new Date(b.start.date)) // Sorteer op startdatum
-      .at(0); // Pak het eerste event (dichtstbijzijnde)
-  });
-
   onMounted(() => {
     fetchLeaveEvents();
-    fetchCanteenEvents();
     setInterval(
       () => {
         window.location.reload(); // Reloads the page
       },
       60 * 60 * 1000,
-    ); // 60 minutes
+    );
   });
 </script>
 

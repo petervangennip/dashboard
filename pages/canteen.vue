@@ -2,7 +2,7 @@
   <section>
     <BaseGridContainer>
       <BaseGridCol100>
-        <Calendar />
+        <Canteen />
       </BaseGridCol100>
     </BaseGridContainer>
   </section>
@@ -12,7 +12,7 @@
   const router = useRouter();
 
   // Set an interval to switch pages every minute
-  let currentPage = 'index';
+  let currentPage = 'canteen';
 
   const navigate = () => {
     if (currentPage === 'index') {

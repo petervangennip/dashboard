@@ -1,5 +1,5 @@
 <template>
-  <header class="mb-12 bg-white py-6 shadow">
+  <header class="relative z-50 mb-12 bg-white py-6 shadow">
     <BaseGridContainer>
       <BaseGridCol100>
         <h1 class="h1 flex items-center">
