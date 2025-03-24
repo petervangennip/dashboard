@@ -6,7 +6,7 @@
     "dev": "nuxt dev --https --ssl-cert ./.ssl/localhost.pem --ssl-key ./.ssl/localhost-key.pem",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "rm -rf node_modules && npm install",
     "node-version": "node ./scripts/switch-node-version.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
