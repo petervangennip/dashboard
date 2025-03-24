@@ -2,11 +2,12 @@
   "name": "nuxt-app",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "nuxi build --preset=cloudflare_pages",
     "dev": "nuxt dev --https --ssl-cert ./.ssl/localhost.pem --ssl-key ./.ssl/localhost-key.pem",
+    "deploy": "npm run build && npx wrangler pages deploy dist/",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "rm -rf node_modules && npm install",
+    "preview": "npm run build && wrangler pages dev dist/",
+    "postinstall": "nuxt prepare",
     "node-version": "node ./scripts/switch-node-version.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
@@ -38,5 +39,8 @@
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
     "vue-collapsed": "^1.3.4"
-  }
+  },
+  "engines": {
+  "node": "22.x"
+}
 }
