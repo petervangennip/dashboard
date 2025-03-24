@@ -4,4 +4,8 @@
     scroll-behavior: smooth;
     @apply font-poppins bg-gray-100;
   }
+
+  .app {
+    @apply flex min-h-screen flex-col overflow-hidden ;
+  }
 }

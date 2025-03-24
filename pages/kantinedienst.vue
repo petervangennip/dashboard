@@ -2,7 +2,7 @@
   <section>
     <BaseGridContainer>
       <BaseGridCol100>
-        <Calendar />
+        <Canteen />
       </BaseGridCol100>
     </BaseGridContainer>
   </section>

@@ -1,8 +1,5 @@
 <template>
-  <p
-    v-if="props?.event?.summary"
-    class="mb-4 text-2xl font-bold"
-  >
+  <p v-if="props?.event?.summary" class="mb-4 text-2xl font-bold">
     {{ props?.event.summary }}
   </p>
   <div
@@ -59,31 +56,31 @@
 </template>
 
 <script setup>
-  // const userColors = ref({}); // Store email-color mapping
-  // const colors = [
-  //   'text-red-600',
-  //   'text-blue-600',
-  //   'text-green-600',
-  //   'text-yellow-600',
-  //   'text-purple-600',
-  //   'text-pink-600',
-  //   'text-indigo-600',
-  //   'text-teal-600',
-  // ];
+// const userColors = ref({}); // Store email-color mapping
+// const colors = [
+//   'text-red-600',
+//   'text-blue-600',
+//   'text-green-600',
+//   'text-yellow-600',
+//   'text-purple-600',
+//   'text-pink-600',
+//   'text-indigo-600',
+//   'text-teal-600',
+// ];
 
-  const props = defineProps({
-    event: {
-      type: Object,
-      default: () => {},
-    },
-  });
+const props = defineProps({
+  event: {
+    type: Object,
+    default: () => {},
+  },
+});
 
-  // // Assign unique colors to each user
-  // const getUserColor = (email) => {
-  //   if (!userColors.value[email]) {
-  //     const randomColor = colors[Object.keys(userColors.value).length % colors.length];
-  //     userColors.value[email] = randomColor;
-  //   }
-  //   return userColors.value[email];
-  // };
+// // Assign unique colors to each user
+// const getUserColor = (email) => {
+//   if (!userColors.value[email]) {
+//     const randomColor = colors[Object.keys(userColors.value).length % colors.length];
+//     userColors.value[email] = randomColor;
+//   }
+//   return userColors.value[email];
+// };
 </script>

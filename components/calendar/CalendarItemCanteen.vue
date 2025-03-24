@@ -1,8 +1,5 @@
 <template>
-  <p
-    v-if="props?.event?.summary"
-    class="mb-4 text-2xl font-bold"
-  >
+  <p v-if="props?.event?.summary" class="mb-4 text-2xl font-bold">
     {{ props?.event.summary }}
   </p>
   <div v-if="props?.event?.start?.date && props?.event?.end?.date">
@@ -16,10 +13,10 @@
 </template>
 
 <script setup>
-  const props = defineProps({
-    event: {
-      type: Object,
-      default: () => {},
-    },
-  });
+const props = defineProps({
+  event: {
+    type: Object,
+    default: () => {},
+  },
+});
 </script>

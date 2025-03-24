@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar">
+  <div class="calendar relative">
     <section class="mb-8">
       <h2 class="mb-8">
         <Icon
@@ -8,6 +8,12 @@
         />
         Eerstvolgende Kantinedienst
       </h2>
+
+      <LoaderSpinnerSimple
+        v-if="isLoading"
+        :is-transparent="true"
+      />
+
       <div
         class="relative mb-4 max-w-[33%] rounded-sm border-2 border-gray-600 bg-white p-4 text-center shadow-md transition-all duration-300"
       >
@@ -19,6 +25,7 @@
 
 <script setup>
   const canteenData = ref(null);
+  const isLoading = ref(true);
 
   // Fetch Canteen events
   async function fetchCanteenEvents() {
@@ -30,6 +37,8 @@
       canteenData.value = result;
     } catch (error) {
       console.error('Error fetching calendar events:', error);
+    } finally {
+      isLoading.value = false; // Hide loader once data is fetched
     }
   }
 
@@ -46,12 +55,6 @@
 
   onMounted(() => {
     fetchCanteenEvents();
-    setInterval(
-      () => {
-        window.location.reload(); // Reloads the page
-      },
-      60 * 60 * 1000,
-    ); // 60 minutes
   });
 </script>
 

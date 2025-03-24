@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar">
+  <div class="calendar relative">
     <section class="mb-8">
       <h2 class="mb-8">
         <Icon
@@ -9,6 +9,12 @@
 
         Aankomend verlof & vrije dagen
       </h2>
+
+      <LoaderSpinnerSimple
+        v-if="isLoading"
+        :is-transparent="true"
+      />
+
       <ul class="grid grid-cols-3 gap-4">
         <li
           v-for="event in sortedEvents"
@@ -25,6 +31,7 @@
 
 <script setup>
   const leaveData = ref(null);
+  const isLoading = ref(true);
 
   // Check if the event is currently active and return a class
   const isActivePeriod = (event) => {
@@ -33,6 +40,9 @@
     const today = new Date();
     const startDate = new Date(event.start.date);
     const endDate = new Date(event.end.date);
+
+    // Extend endDate to include the entire last day
+    endDate.setHours(23, 59, 59, 999);
 
     return today >= startDate && today <= endDate
       ? 'border-2 border-transparent animate-gradient-border shadow-2xl rounded-sm is-current'
@@ -49,21 +59,17 @@
       leaveData.value = result;
     } catch (error) {
       console.error('Error fetching calendar events:', error);
+    } finally {
+      isLoading.value = false; // Hide loader once data is fetched
     }
   }
-
-  // Computed property to return sorted events
-  // const sortedEvents = computed(() => {
-  //   if (!leaveData.value || !leaveData.value.items) return [];
-  //   return [...leaveData.value.items].sort((a, b) => new Date(a.start.date) - new Date(b.start.date));
-  // });
 
   // Computed property to get sorted and filtered upcoming events, including ongoing events
   const sortedEvents = computed(() => {
     if (!leaveData.value || !leaveData.value.items) return [];
 
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Zet tijd op middernacht voor vergelijking
+    today.setHours(0, 0, 0, 0);
 
     return [...leaveData.value.items]
       .filter((event) => {
@@ -86,12 +92,6 @@
 
   onMounted(() => {
     fetchLeaveEvents();
-    setInterval(
-      () => {
-        window.location.reload(); // Reloads the page
-      },
-      60 * 60 * 1000,
-    );
   });
 </script>
 
