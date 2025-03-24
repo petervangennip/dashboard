@@ -7,13 +7,16 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "node-version": "node ./scripts/switch-node-version.js"
+    "node-version": "node ./scripts/switch-node-version.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@nuxt/eslint": "^0.7.5",
     "@nuxt/image": "^1.9.0",
     "@nuxtjs/html-validator": "^1.8.2",
     "@vueuse/core": "^12.4.0",
+    "animate.css": "^4.1.1",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",

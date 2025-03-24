@@ -22,8 +22,18 @@ export default defineNuxtConfig({
           type: 'image/x-icon',
           href: '/assets/favicon/apple-touch-icon.png',
         },
-        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/assets/favicon/favicon-32x32.png' },
-        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/assets/favicon/favicon-16x16.png' },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '32x32',
+          href: '/assets/favicon/favicon-32x32.png',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '16x16',
+          href: '/assets/favicon/favicon-16x16.png',
+        },
         { rel: 'mask-icon', href: '/assets/favicon/safari-pinned-tab.svg', color: '#ffffff' },
         { rel: 'icon', type: 'image/x-icon', href: '/assets/favicon/favicon.ico' },
         { rel: 'shortcut icon', type: 'image/x-icon', href: '/assets/favicon/favicon.ico' },
@@ -39,7 +49,7 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
   },
 
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/main.css', 'animate.css/animate.compat.css'],
 
   htmlValidator: {
     usePrettier: false,
@@ -69,6 +79,7 @@ export default defineNuxtConfig({
       siteHostname: process.env.SITE_HOSTNAME || '',
       supabaseUrl: process.env?.SUPABASE_URL || null,
       supabaseKey: process.env?.SUPABASE_KEY || null,
+      intervalPageSwitch: process.env?.INTERVAL_PAGE_SWITCH || null,
     },
   },
 });

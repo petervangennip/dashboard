@@ -1,10 +1,10 @@
 module.exports = {
-  plugins: ["prettier-plugin-tailwindcss"],
+  plugins: ['prettier-plugin-tailwindcss'],
   singleQuote: true,
-  trailingComma: "all",
+  trailingComma: 'all',
   useTabs: false,
   tabWidth: 2,
-  arrowParens: "always",
+  arrowParens: 'always',
   printWidth: 120,
   singleAttributePerLine: true,
   vueIndentScriptAndStyle: true,
