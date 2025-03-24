@@ -5,20 +5,11 @@
 </template>
 
 <style>
-  .page-enter-active,
+  .page-enter-active {
+    animation: slideInRight 500ms;
+  }
+
   .page-leave-active {
-    transition: transform 0.5s ease-in-out;
-    position: absolute;
-    width: 100%;
-  }
-
-  .page-enter,
-  .page-leave-to {
-    transform: translateY(-100%);
-  }
-
-  .page-enter-to,
-  .page-leave {
-    transform: translateY(0);
+    animation: slideOutLeft 500ms;
   }
 </style>
