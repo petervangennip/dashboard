@@ -1,7 +1,7 @@
 <template>
   <div class="calendar relative">
     <section class="mb-8">
-      <h2 class="mb-8">
+      <h2 class="mb-8 dark:text-white">
         <Icon
           name="twemoji:calendar"
           class="mr-2 size-8"
@@ -128,7 +128,8 @@
   }
 
   .is-current {
-    background: repeating-linear-gradient(135deg, rgba(0, 175, 90, 0.25) 0%, rgba(0, 122, 64, 0.25) 10%),
+    background:
+      repeating-linear-gradient(135deg, rgba(0, 175, 90, 0.25) 0%, rgba(0, 122, 64, 0.25) 10%),
       radial-gradient(circle farthest-side at 0% 0%, rgba(0, 175, 90, 0.25) 0%, rgba(0, 0, 255, 0) 100%),
       radial-gradient(circle farthest-side at 100% 100%, rgba(0, 255, 135, 0.25) 0%, rgba(0, 0, 255, 0) 100%);
     background-blend-mode: soft-light;

@@ -1,10 +1,10 @@
 <template>
-  <header class="relative z-50 bg-white py-6 shadow">
+  <header class="relative z-50 bg-white py-6 shadow dark:bg-gray-800">
     <BaseGridContainer>
       <BaseGridCol100>
         <h1 class="h1 flex items-center">
           <span class="mr-4 text-green-600">Twentyseven</span>
-          <span>Dashboard</span>
+          <span class="dark:text-white">Dashboard</span>
           <Icon
             name="ic:baseline-dashboard-customize"
             class="ml-4 text-green-700"

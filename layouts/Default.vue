@@ -1,5 +1,5 @@
 <template>
-  <main class="app">
+  <main class="app bg-white dark:bg-gray-800">
     <AppHeader :progress="progress" />
     <slot />
   </main>
