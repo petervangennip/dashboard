@@ -1,4 +1,4 @@
-export const usePageRotator = (ms = 10000) => {
+export const usePageRotator = (ms = 20000) => {
   const router = useRouter();
   const pages = Object.keys(import.meta.glob('../pages/*.vue')).map((path) =>
     path.replace('../pages/', '').replace('.vue', '') === 'index'
